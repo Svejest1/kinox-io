@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КиноX - История покупок</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Можно использовать те же стили, что и для user-bookings, или создать отдельные, если нужно -->
+    <link rel="stylesheet" href="assets/css/components/user-bookings.css"> 
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1>Кино<span class="accent">X</span></h1>
+        </div>
+        <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Афиша</a></li>
+                <li><a href="schedule.html">Расписание</a></li>
+                <li><a href="coming-soon.html">Скоро</a></li>
+                <li><a href="about.html">О кинотеатре</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="search-btn" aria-label="Поиск"></button>
+            <div class="user-menu-container">
+                <button class="user-menu-btn" aria-label="Меню пользователя" id="profileButton">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown" id="userDropdownContainer">
+                    <div class="dropdown-content" id="userDropdownMenu">
+                        <a href="profile.html">Профиль</a>
+                        <a href="user-bookings.html">История бронирований</a> <!-- Эта ссылка остается -->
+                        <a href="purchase-history.html">История покупок</a> <!-- Эта ссылка будет вести на новую страницу -->
+                        <button id="logoutButton">Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content user-bookings-page"> <!-- Можно оставить user-bookings-page класс для стилей или создать новый -->
+        <div class="container">
+            <h1 class="page-title">История покупок</h1>
+            
+            <!-- Вкладки статусов здесь не нужны -->
+            
+            <div class="bookings-list" id="purchaseHistoryList">
+                <!-- Индикатор загрузки можно добавить здесь или управлять им из JS -->
+                <div class="loading-indicator">
+                    <p>Загрузка истории покупок...</p>
+                </div>
+            </div>
+            
+            <div class="empty-state" id="emptyPurchaseState" style="display: none;">
+                <div class="empty-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <h2>Нет покупок</h2>
+                <p>У вас пока нет подтвержденных покупок.</p>
+                <a href="index.html" class="primary-button">Перейти к афише</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer-bottom">
+        <p>&copy; 2024 КиноX. Все права защищены.</p>
+    </footer>
+
+    <script src="assets/js/auth-check.js"></script>
+    <script src="assets/js/main.js"></script>
+    <!-- Подключаем API скрипт перед скриптом страницы -->
+    <script src="assets/js/api.js"></script>
+    <!-- Подключаем новый JS файл -->
+    <script src="assets/js/purchase-history.js"></script> 
+</body>
+</html> 

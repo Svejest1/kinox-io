@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Название Фильма - Кинотеатр Будущего</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components/movie-details.css"> <!-- Стили для страницы фильма -->
+    <!-- Дополнительные CSS файлы будут подключаться здесь -->
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1>Кино<span class="accent">X</span></h1>
+        </div>
+        <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html" class="active">Афиша</a></li>
+                <li><a href="#">Расписание</a></li>
+                <li><a href="#">Скоро</a></li>
+                <li><a href="#">О кинотеатре</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="search-btn" aria-label="Поиск">
+                <!-- Иконка поиска (SVG или шрифт) -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"/></svg>
+            </button>
+            <button class="profile-btn" aria-label="Профиль">
+                <!-- Иконка профиля -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content movie-detail-page">
+        <!-- Контент будет загружен JS на основе ID фильма из URL -->
+        <div id="movie-details-container">
+            <!-- Загрузка... -->
+        </div>
+    </main>
+
+    <footer class="site-footer-bottom">
+        <p>&copy; 2024 КиноX. Все права защищены. Дизайн будущего от Gemini.</p>
+    </footer>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/ui/movie-details.js"></script> 
+    <script src="assets/js/ui/navigation.js"></script>
+    
+</body>
+</html> 

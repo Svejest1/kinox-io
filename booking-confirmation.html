@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КиноX - Подтверждение бронирования</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components/booking-confirmation.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1>Кино<span class="accent">X</span></h1>
+        </div>
+        <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Афиша</a></li>
+                <li><a href="schedule.html">Расписание</a></li>
+                <li><a href="coming-soon.html">Скоро</a></li>
+                <li><a href="about.html">О кинотеатре</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="search-btn" aria-label="Поиск"></button>
+            <div class="user-menu-container">
+                <button class="user-menu-btn" aria-label="Меню пользователя" id="profileButton">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown" id="userDropdownContainer">
+                    <div class="dropdown-content" id="userDropdownMenu">
+                        <a href="profile.html">Профиль</a>
+                        <a href="#">История покупок</a>
+                        <button id="logoutButton">Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content booking-confirmation-page">
+        <div class="container">
+            <div class="booking-status glassmorphic-panel">
+                <div id="bookingStatusHeader">
+                    <h1 class="status-title">Бронирование подтверждено</h1>
+                    <p class="status-message">Ваше бронирование успешно создано и действительно в течение <span id="expiryTimer">15:00</span></p>
+                </div>
+                <div class="booking-actions">
+                    <button id="confirmPaymentButton" class="primary-button">Подтвердить бронирование</button>
+                    <button id="cancelBookingButton" class="secondary-button">Отменить бронирование</button>
+                </div>
+            </div>
+
+            <section class="booking-details glassmorphic-panel">
+                <h2>Информация о бронировании</h2>
+                
+                <div class="booking-info">
+                    <div class="movie-details">
+                        <div class="movie-poster">
+                            <img src="" alt="Постер фильма" id="moviePoster">
+                        </div>
+                        <div class="movie-info">
+                            <h3 id="movieTitle">Загрузка...</h3>
+                            <p><strong>Дата:</strong> <span id="screeningDate">Загрузка...</span></p>
+                            <p><strong>Время:</strong> <span id="screeningTime">Загрузка...</span></p>
+                            <p><strong>Зал:</strong> <span id="hallName">Загрузка...</span></p>
+                            <p><strong>Формат:</strong> <span id="screeningFormat">Загрузка...</span></p>
+                        </div>
+                    </div>
+                    
+                    <div class="seats-info">
+                        <h3>Выбранные места</h3>
+                        <ul id="seatsList">
+                            <li>Загрузка...</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="payment-info">
+                        <h3>Информация об оплате</h3>
+                        <p><strong>Номер бронирования:</strong> <span id="bookingNumber">Загрузка...</span></p>
+                        <p><strong>Статус:</strong> <span id="bookingStatus">Загрузка...</span></p>
+                        <p><strong>Время создания:</strong> <span id="bookingTime">Загрузка...</span></p>
+                        <p><strong>Действительно до:</strong> <span id="expiryTime">Загрузка...</span></p>
+                        <p class="total-price"><strong>Итого к оплате:</strong> <span id="totalPrice">Загрузка...</span></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="booking-instructions glassmorphic-panel">
+                <h2>Инструкции</h2>
+                <div class="instructions-content">
+                    <p>Пожалуйста, обратите внимание на следующую информацию:</p>
+                    <ul>
+                        <li>Бронирование действительно в течение 15 минут.</li>
+                        <li>Для подтверждения бронирования нажмите кнопку "Подтвердить бронирование".</li>
+                        <li>После подтверждения бронирования, вы получите электронный билет на указанный в профиле email.</li>
+                        <li>При посещении кинотеатра предъявите QR-код билета.</li>
+                        <li>Рекомендуем прийти в кинотеатр за 15-20 минут до начала сеанса.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="site-footer-bottom">
+        <p>&copy; 2024 КиноX. Все права защищены.</p>
+    </footer>
+
+    <script src="assets/js/auth-check.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/booking-confirmation.js"></script>
+</body>
+</html> 

@@ -1,0 +1,304 @@
+/* Стили для страницы истории бронирований */
+.user-bookings-page .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-unit-large);
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: var(--spacing-unit-large);
+    color: var(--color-text-primary);
+}
+
+/* Стили для вкладок */
+.booking-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-unit-large);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-unit);
+}
+
+.tab-button {
+    padding: var(--spacing-unit-small) var(--spacing-unit);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: var(--spacing-unit);
+    margin-bottom: calc(var(--spacing-unit-small) / 2);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    transition: all 0.2s ease;
+}
+
+.tab-button:last-child {
+    margin-right: 0;
+}
+
+.tab-button:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent-light);
+}
+
+.tab-button.active {
+    color: var(--color-accent);
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-accent);
+}
+
+/* Стили для списка бронирований */
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit);
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: var(--spacing-unit-large);
+    color: var(--color-text-secondary);
+}
+
+/* Стили для карточки бронирования */
+.booking-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--color-background-card);
+}
+
+.booking-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-unit);
+    background-color: var(--color-background-light);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.booking-id {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.booking-status {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 12px;
+}
+
+.booking-status.temporary {
+    background-color: var(--color-accent-light);
+    color: var(--color-accent-dark);
+}
+
+.booking-status.confirmed {
+    background-color: var(--color-success-light);
+    color: var(--color-success);
+}
+
+.booking-status.cancelled {
+    background-color: var(--color-error-light);
+    color: var(--color-error);
+}
+
+.booking-content {
+    display: flex;
+    padding: var(--spacing-unit);
+    gap: var(--spacing-unit);
+}
+
+.booking-poster {
+    width: 80px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.booking-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.booking-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit-small);
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.booking-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-unit-small);
+}
+
+.booking-info p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+
+.booking-seats {
+    margin-top: var(--spacing-unit-small);
+}
+
+.booking-seats-title {
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin: 0 0 var(--spacing-unit-small) 0;
+    font-size: 0.9rem;
+}
+
+.seats-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-unit-small);
+}
+
+.seat-tag {
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.seat-tag.vip {
+    background-color: var(--color-gold-light);
+    color: var(--color-gold-dark);
+}
+
+.booking-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-unit);
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-background-light);
+}
+
+.booking-price {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.booking-actions {
+    display: flex;
+    gap: var(--spacing-unit-small);
+}
+
+.view-button, 
+.cancel-button {
+    padding: calc(var(--spacing-unit-small) + 2px) calc(var(--spacing-unit) + 4px);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.view-button {
+    background-color: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+}
+
+.view-button:hover {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.cancel-button {
+    background-color: transparent;
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+}
+
+.cancel-button:hover {
+    background-color: rgba(var(--color-error-rgb), 0.1);
+    color: var(--color-error-dark);
+    border-color: var(--color-error-dark);
+}
+
+.cancel-button:disabled,
+.view-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Стили для пустого состояния */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--spacing-unit-large);
+    color: var(--color-text-secondary);
+}
+
+.empty-icon {
+    margin-bottom: var(--spacing-unit);
+    color: var(--color-text-muted);
+}
+
+.empty-state h2 {
+    margin: 0 0 var(--spacing-unit-small) 0;
+    color: var(--color-text-primary);
+}
+
+.empty-state p {
+    margin: 0 0 var(--spacing-unit-large) 0;
+}
+
+.empty-state .primary-button {
+    padding: var(--spacing-unit-small) var(--spacing-unit);
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.empty-state .primary-button:hover {
+    background-color: var(--color-accent-dark);
+}
+
+/* Адаптивная верстка */
+@media (max-width: 768px) {
+    .booking-content {
+        flex-direction: column;
+    }
+    
+    .booking-poster {
+        width: 100%;
+        height: 150px;
+    }
+} 

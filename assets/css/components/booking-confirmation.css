@@ -1,0 +1,246 @@
+/* Стили для страницы подтверждения бронирования */
+.booking-confirmation-page .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--spacing-unit-large);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit-large);
+}
+
+/* Стили для статуса бронирования */
+.booking-status {
+    padding: var(--spacing-unit-large);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit-large);
+    position: relative;
+    overflow: hidden;
+}
+
+.booking-status::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, var(--color-accent), var(--color-accent-light));
+}
+
+.status-title {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--color-accent);
+}
+
+.status-message {
+    margin: 0;
+    color: var(--color-text-secondary);
+}
+
+#expiryTimer {
+    font-weight: bold;
+    color: var(--color-text-primary);
+}
+
+.booking-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-unit);
+}
+
+.primary-button {
+    padding: var(--spacing-unit);
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex: 1;
+    min-width: 200px;
+}
+
+.primary-button:hover {
+    background-color: var(--color-accent-dark);
+}
+
+.secondary-button {
+    padding: var(--spacing-unit);
+    background-color: transparent;
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+    min-width: 200px;
+}
+
+.secondary-button:hover {
+    background-color: var(--color-error-light);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+    background-color: var(--color-disabled);
+    border-color: var(--color-disabled);
+    color: var(--color-text-secondary);
+    cursor: not-allowed;
+}
+
+/* Стили для информации о бронировании */
+.booking-details {
+    padding: var(--spacing-unit-large);
+}
+
+.booking-details h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-unit-large);
+    text-align: center;
+}
+
+.booking-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-unit-large);
+}
+
+.movie-details {
+    display: flex;
+    gap: var(--spacing-unit-large);
+}
+
+.movie-poster {
+    flex-shrink: 0;
+    width: 120px;
+    height: 180px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.movie-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-info {
+    flex: 1;
+}
+
+.movie-info h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-unit);
+    color: var(--color-text-primary);
+}
+
+.movie-info p {
+    margin: var(--spacing-unit-small) 0;
+    color: var(--color-text-secondary);
+}
+
+.seats-info h3,
+.payment-info h3 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-unit);
+    color: var(--color-text-primary);
+}
+
+.seats-info ul {
+    padding-left: var(--spacing-unit-large);
+    margin: 0;
+}
+
+.seats-info li {
+    margin-bottom: var(--spacing-unit-small);
+    color: var(--color-text-secondary);
+}
+
+.payment-info p {
+    margin: var(--spacing-unit-small) 0;
+    color: var(--color-text-secondary);
+}
+
+.total-price {
+    font-size: 1.2rem;
+    margin-top: var(--spacing-unit) !important;
+    padding-top: var(--spacing-unit);
+    border-top: 1px solid var(--color-border);
+}
+
+.total-price strong,
+.total-price span {
+    color: var(--color-text-primary) !important;
+}
+
+/* Стили для инструкций */
+.booking-instructions {
+    padding: var(--spacing-unit-large);
+}
+
+.booking-instructions h2 {
+    margin-top: 0;
+    margin-bottom: var(--spacing-unit-large);
+    text-align: center;
+}
+
+.instructions-content p {
+    margin-top: 0;
+    margin-bottom: var(--spacing-unit);
+    color: var(--color-text-secondary);
+}
+
+.instructions-content ul {
+    padding-left: var(--spacing-unit-large);
+    margin: 0;
+}
+
+.instructions-content li {
+    margin-bottom: var(--spacing-unit-small);
+    color: var(--color-text-secondary);
+}
+
+/* Статусы бронирования */
+.booking-status.confirmed::before {
+    background: linear-gradient(to right, var(--color-success), var(--color-success-light));
+}
+
+.booking-status.confirmed .status-title {
+    color: var(--color-success);
+}
+
+.booking-status.expired::before,
+.booking-status.cancelled::before {
+    background: linear-gradient(to right, var(--color-error), var(--color-error-light));
+}
+
+.booking-status.expired .status-title,
+.booking-status.cancelled .status-title {
+    color: var(--color-error);
+}
+
+/* Адаптивная верстка */
+@media (min-width: 768px) {
+    .booking-info {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .movie-details {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 992px) {
+    .booking-info {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+    
+    .movie-details {
+        grid-column: unset;
+    }
+} 

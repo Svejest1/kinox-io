@@ -1,0 +1,191 @@
+.movie-details-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.movie-header {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .movie-header {
+    flex-direction: column;
+  }
+}
+
+.movie-poster-large {
+  flex: 0 0 300px;
+}
+
+.movie-poster-large img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.movie-info-large {
+  flex: 1;
+}
+
+.movie-info-large .movie-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.movie-info-large .age-rating {
+  display: inline-block;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-size: 1rem;
+  vertical-align: middle;
+  margin-left: 15px;
+}
+
+.movie-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.movie-meta span {
+  margin-right: 15px;
+}
+
+.movie-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.movie-trailer {
+  margin-top: 20px;
+}
+
+.btn-trailer {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-trailer:hover {
+  background-color: var(--accent-color);
+}
+
+.movie-cast {
+  margin-bottom: 40px;
+}
+
+.movie-cast h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+.movie-screenings {
+  margin-top: 50px;
+}
+
+.movie-screenings h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+}
+
+.screening-date {
+  margin-bottom: 30px;
+}
+
+.screening-date h4 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.screening-times {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.screening-time-card {
+  background: rgba(16, 18, 27, 0.4);
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.screening-time-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  background: rgba(var(--accent-color-rgb), 0.2);
+}
+
+.screening-time-card .time {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin-bottom: 8px;
+}
+
+.screening-time-card .format,
+.screening-time-card .hall {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+}
+
+.screening-time-card .price {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.btn-buy {
+  display: block;
+  background-color: var(--accent-color);
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-buy:hover {
+  background-color: rgba(var(--accent-color-rgb), 0.8);
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 4px solid rgba(255, 0, 0, 0.5);
+  color: #fff;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 40px;
+  color: rgba(255, 255, 255, 0.7);
+} 

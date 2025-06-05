@@ -1,0 +1,437 @@
+/* assets/css/components/seat-selector.css */
+
+.seat-selection-page {
+    padding-top: calc(var(--header-height) + var(--spacing-unit) * 2); 
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем основной контент */
+}
+
+.page-title-container {
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+#movie-title-for-seats span,
+#session-info-for-seats span {
+    color: var(--color-secondary-accent);
+    font-weight: bold;
+}
+
+.seat-selector-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px; /* Ограничим ширину для лучшего восприятия схемы */
+    margin-bottom: calc(var(--spacing-unit) * 4);
+    /* perspective: 1500px; */ /* Убираем, так как карта мест будет плоской */
+}
+
+.screen-area {
+    width: 60%;
+    margin-bottom: calc(var(--spacing-unit) * 4); /* Отступ от экрана до первого ряда */
+    padding: var(--spacing-unit) 0;
+    text-align: center;
+}
+
+.screen-line {
+    height: 10px; /* Толщина линии экрана */
+    background-color: var(--color-secondary-accent);
+    border-radius: 5px;
+    box-shadow: 0 0 15px var(--color-secondary-accent), 0 0 30px var(--color-secondary-accent);
+    
+    /* Скрываем любой текст, который может быть напрямую в HTML этого элемента */
+    font-size: 0;
+    color: transparent; 
+    
+    text-align: center;
+    /* Убираем line-height и padding-bottom, будем позиционировать текст через псевдоэлемент или data-attribute */
+    /* line-height: 0; */ 
+    /* padding-bottom: calc(var(--spacing-unit) * 2.5); */
+    transform: rotateX(55deg) translateY(-5px); /* Убрали scaleY(0.9) */
+    transform-origin: bottom center;
+    /* font-size: calc(var(--p-size) * 0.9); */ /* Убрали, так как текст будет в ::after */
+    position: relative; /* Для позиционирования текста */
+    /* font-weight: bold; */ /* Убрали, будет в ::after */
+    /* letter-spacing: 2px; */ /* Убрали, будет в ::after */
+}
+
+/* УБИРАЕМ ПСЕВДОЭЛЕМЕНТ, ТАК КАК ТЕКСТ БУДЕТ В HTML
+.screen-line::after {
+    content: 'ЭКРАН';
+    position: absolute;
+    bottom: -50px; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--color-text-secondary);
+    font-size: calc(var(--p-size) * 0.85); 
+    letter-spacing: 1.8px; 
+    font-weight: bold; 
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7); 
+    display: inline-block; 
+    white-space: nowrap;
+}
+*/
+
+/* СТИЛИ ДЛЯ НОВОГО ЭЛЕМЕНТА .screen-text */
+.screen-text {
+    color: var(--color-text-secondary);
+    font-size: calc(var(--p-size) * 0.9); /* Можно настроить размер */
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: calc(var(--spacing-unit) * 1.5); /* Отступ от линии экрана, настроить по вкусу */
+    /* text-shadow: 0 1px 3px rgba(0,0,0,0.5); */ /* Можно добавить тень при необходимости */
+    /* Важно: этот элемент не должен быть внутри трансформируемых контейнеров, если мы хотим избежать искажений */
+    /* Он должен быть в .screen-area, но после .screen-line */
+}
+
+.seat-map {
+    display: grid;
+    gap: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1); 
+    padding: calc(var(--spacing-unit) * 2);
+    /* Убираем 3D трансформацию для карты мест */
+    /* transform: rotateX(50deg) scale(0.9); */
+    /* transform-style: preserve-3d; */
+    width: fit-content; 
+    margin: calc(var(--spacing-unit) * 2) auto 0; /* Добавим отступ сверху от экрана */
+}
+
+.seat-row {
+    display: flex; /* Используем flex для расположения мест в ряду */
+    justify-content: center;
+    gap: calc(var(--spacing-unit) * 1);
+}
+
+.seat {
+    width: 30px;
+    height: 25px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-glass-border);
+    border-radius: 5px 5px 2px 2px; /* Стилизация под сиденье */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(var(--p-size) * 0.7);
+    color: var(--color-text-secondary);
+    transition: background-color var(--transition-speed) ease, transform 0.2s ease, box-shadow var(--transition-speed) ease;
+    transform-style: preserve-3d; /* Для возможных 3D эффектов на самом месте */
+}
+
+.seat:hover:not(.occupied):not(.selected) {
+    background-color: hsl(from var(--color-secondary-accent) h s calc(l - 20%));
+    transform: scale(1.1) translateZ(5px); /* Небольшой подъем при наведении */
+    box-shadow: 0 0 10px var(--color-secondary-accent);
+}
+
+.seat.available {
+    /* Уже стилизовано по умолчанию */
+}
+
+.seat.selected {
+    background-color: var(--color-primary-accent);
+    color: var(--color-text-primary);
+    border-color: var(--color-primary-accent);
+    box-shadow: 0 0 12px var(--color-primary-accent);
+    transform: scale(1.05) translateZ(3px);
+}
+
+.seat.occupied {
+    background-color: var(--color-text-secondary); 
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: var(--color-surface);
+}
+
+.seat.vip {
+    border-color: gold; /* Специальная рамка для VIP */
+    box-shadow: 0 0 10px gold;
+}
+.seat.vip.available:hover {
+    background-color: hsl(from gold h s calc(l - 10%));
+}
+.seat.vip.selected {
+    background-color: gold;
+    color: var(--color-background);
+}
+
+/* Новое правило только для .empty-space */
+.empty-space {
+    /* Эти размеры должны совпадать с размерами .seat для правильного выравнивания в ряду */
+    width: 30px; 
+    height: 25px;
+    /* Убедимся, что они невидимы и не влияют на события */
+    background-color: transparent;
+    border: none; /* или 1px solid transparent, если это помогает с выравниванием */
+    cursor: default;
+    pointer-events: none; 
+    /* Убираем flex-свойства, если они наследовались от .seat и мешают */
+    display: inline-block; /* или block, в зависимости от того, как .seat-row их выстраивает */
+}
+
+.seat-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing-unit) * 3);
+    margin-top: calc(var(--spacing-unit) * 4);
+    padding: var(--spacing-unit) * 2;
+    width: 100%;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-unit);
+    font-size: calc(var(--p-size) * 0.9);
+}
+
+.seat-example {
+    width: 20px;
+    height: 15px;
+    border-radius: 3px 3px 1px 1px;
+    display: inline-block;
+    border: 1px solid var(--color-glass-border);
+}
+
+.seat-example.available { background-color: var(--color-surface); }
+.seat-example.selected { background-color: var(--color-primary-accent); border-color: var(--color-primary-accent); }
+.seat-example.occupied { background-color: var(--color-text-secondary); opacity: 0.6; }
+.seat-example.vip { border-color: gold; background-color: var(--color-surface); }
+
+
+.booking-summary {
+    width: 100%;
+    max-width: 500px; /* Ограничим ширину панели */
+    padding: calc(var(--spacing-unit) * 3);
+    border-radius: var(--border-radius-main);
+    /* glassmorphic-panel класс уже должен применить глассморфизм из style.css, если он там есть */
+    /* Если нет, то: 
+    background-color: var(--color-glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--box-shadow-soft);
+    */
+    margin-top: calc(var(--spacing-unit) * 3);
+}
+
+.booking-summary h3 {
+    color: var(--color-text-primary);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    text-align: center;
+}
+
+#selected-seats-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    min-height: 50px; /* Чтобы блок не "прыгал" когда места добавляются/удаляются */
+}
+
+#selected-seats-list li {
+    background-color: rgba(var(--color-surface-rgb), 0.5);
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+    border-radius: var(--border-radius-small);
+    margin-bottom: var(--spacing-unit);
+    font-size: calc(var(--p-size) * 0.95);
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-price {
+    font-size: var(--h3-size);
+    font-weight: bold;
+    color: var(--color-secondary-accent);
+    text-align: right;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+#proceed-to-checkout-btn {
+    width: 100%;
+    padding: calc(var(--spacing-unit) * 1.8) calc(var(--spacing-unit) * 3);
+}
+
+#proceed-to-checkout-btn:disabled {
+    background-color: var(--color-text-secondary);
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+/* Общие стили для страницы, если нужны */
+.seat-selection-page .loading-message {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 3);
+}
+
+/* Адаптивность для страницы выбора мест */
+
+@media (max-width: 768px) {
+    .seat-selection-page {
+        padding-top: calc(var(--header-height) + var(--spacing-unit) * 1.5);
+    }
+
+    .page-title-container {
+        margin-bottom: calc(var(--spacing-unit) * 2.5);
+    }
+
+    #movie-title-for-seats {
+        font-size: calc(var(--h2-size) * 0.9);
+    }
+
+    #session-info-for-seats {
+        font-size: calc(var(--p-size) * 0.95);
+    }
+
+    .seat-selector-container {
+        margin-bottom: calc(var(--spacing-unit) * 3);
+    }
+
+    .screen-area {
+        width: 70%; /* Немного шире для средних экранов */
+        margin-bottom: calc(var(--spacing-unit) * 3);
+    }
+
+    .screen-line {
+        height: 8px;
+        /* Может потребоваться корректировка transform, если экран выглядит слишком большим/маленьким */
+    }
+
+    .screen-text {
+        font-size: calc(var(--p-size) * 0.85);
+        margin-top: var(--spacing-unit);
+    }
+
+    .seat-map {
+        gap: calc(var(--spacing-unit) * 0.6) calc(var(--spacing-unit) * 0.8); 
+        padding: calc(var(--spacing-unit) * 1.5);
+        /* Для предотвращения слишком широкой карты можно добавить горизонтальную прокрутку */
+        overflow-x: auto;
+        max-width: 100%; /* Чтобы overflow-x работал корректно */
+    }
+
+    .seat-row {
+        gap: calc(var(--spacing-unit) * 0.8);
+    }
+
+    .seat,
+    .empty-space {
+        width: 26px;
+        height: 22px;
+        font-size: calc(var(--p-size) * 0.65);
+        border-radius: 4px 4px 1px 1px;
+    }
+
+    .seat-legend {
+        gap: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2);
+        margin-top: calc(var(--spacing-unit) * 3);
+        padding: var(--spacing-unit) * 1.5;
+    }
+
+    .legend-item {
+        gap: calc(var(--spacing-unit) * 0.8);
+        font-size: calc(var(--p-size) * 0.85);
+    }
+
+    .seat-example {
+        width: 18px;
+        height: 14px;
+    }
+
+    .booking-summary {
+        max-width: 100%; /* Занимает всю доступную ширину */
+        padding: calc(var(--spacing-unit) * 2);
+        margin-top: calc(var(--spacing-unit) * 2.5);
+    }
+
+    .booking-summary h3 {
+        font-size: calc(var(--h3-size) * 0.9);
+        margin-bottom: calc(var(--spacing-unit) * 1.5);
+    }
+
+    #selected-seats-list li {
+        padding: calc(var(--spacing-unit) * 0.8) var(--spacing-unit);
+        font-size: calc(var(--p-size) * 0.9);
+    }
+
+    .total-price {
+        font-size: calc(var(--h3-size) * 0.95);
+        margin-bottom: calc(var(--spacing-unit) * 2.5);
+    }
+
+    #proceed-to-checkout-btn {
+        padding: calc(var(--spacing-unit) * 1.2) var(--spacing-unit);
+        font-size: calc(var(--p-size) * 0.95);
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title-container {
+        margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+    
+    #movie-title-for-seats {
+        font-size: calc(var(--h2-size) * 0.8);
+    }
+
+    #session-info-for-seats {
+        font-size: calc(var(--p-size) * 0.85);
+        flex-direction: column; /* Для очень маленьких экранов, если нужно */
+        gap: calc(var(--spacing-unit) * 0.5);
+    }
+
+    .screen-area {
+        width: 85%;
+        margin-bottom: calc(var(--spacing-unit) * 2.5);
+    }
+
+    .screen-line {
+       /* Можно еще уменьшить, если нужно */
+    }
+
+    .screen-text {
+        font-size: calc(var(--p-size) * 0.8);
+    }
+    
+    /* Если схема зала все еще слишком широкая, активируем прокрутку */
+    .seat-map-wrapper { /* Обертка для seat-map, если нужна прокрутка */
+        width: 100%;
+        overflow-x: auto;
+        margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+    .seat-map {
+        overflow-x: auto; /* Включаем горизонтальную прокрутку для карты мест */
+        max-width: calc(100vw - var(--spacing-unit) * 3); /* Ограничиваем ширину карты (100% вьюпорта минус предполагаемые отступы страницы по бокам, например, по 1.5su с каждой стороны) */
+        padding: var(--spacing-unit); /* Можно уменьшить внутренние отступы самой карты, если нужно */
+        gap: calc(var(--spacing-unit) * 0.5) calc(var(--spacing-unit) * 0.7); /* Можно уменьшить отступы между местами */
+        margin-left: auto; /* Центрируем карту, если она уже, чем max-width */
+        margin-right: auto;
+    }
+
+    .seat,
+    .empty-space {
+        width: 22px; 
+        height: 19px;
+        font-size: calc(var(--p-size) * 0.6);
+    }
+
+    .seat-legend {
+        flex-direction: column; /* Легенда в столбец для экономии места */
+        align-items: flex-start;
+        gap: var(--spacing-unit);
+        padding: var(--spacing-unit);
+        margin-top: calc(var(--spacing-unit) * 2);
+    }
+
+    .legend-item {
+        font-size: calc(var(--p-size) * 0.8);
+    }
+
+    .booking-summary {
+        padding: var(--spacing-unit) * 1.5;
+    }
+} 

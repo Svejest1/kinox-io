@@ -1,0 +1,115 @@
+.profile-page {
+    padding-top: calc(var(--spacing-unit) * 4);
+    padding-bottom: calc(var(--spacing-unit) * 4);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 3);
+}
+
+.profile-info,
+.purchase-history {
+    padding: calc(var(--spacing-unit) * 3);
+}
+
+.profile-info h2,
+.purchase-history h2 {
+    color: var(--color-text-primary);
+    margin-bottom: calc(var(--spacing-unit) * 2.5);
+    text-align: center; /* Центрируем заголовки секций */
+}
+
+.profile-details {
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.profile-details p {
+    font-size: var(--p-size);
+    color: var(--color-text-secondary);
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+}
+
+.profile-details p strong {
+    color: var(--color-text-primary);
+    font-weight: bold;
+}
+
+.purchase-list {
+    list-style: none;
+    padding: 0;
+}
+
+.purchase-list li {
+    font-size: var(--p-size);
+    color: var(--color-text-secondary);
+    padding: calc(var(--spacing-unit) * 1.5) 0;
+    border-bottom: 1px solid var(--color-glass-border);
+}
+
+.purchase-list li:last-child {
+    border-bottom: none;
+}
+
+.profile-info button,
+.purchase-history button {
+    margin-top: calc(var(--spacing-unit) * 2);
+    display: block; /* Чтобы кнопки занимали всю ширину контейнера */
+    width: 100%;
+    text-align: center; /* Центрируем текст на кнопках */
+}
+
+/* Стили для формы редактирования профиля */
+.profile-edit-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.form-group input {
+    width: 100%;
+    padding: calc(var(--spacing-unit) * 1.2);
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--border-radius);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px rgba(var(--color-accent-rgb), 0.25);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: calc(var(--spacing-unit) * 2);
+    margin-top: calc(var(--spacing-unit) * 3);
+}
+
+.form-actions button {
+    flex: 1;
+}
+
+/* Адаптивность для страницы профиля */
+@media (min-width: 768px) {
+    .profile-page {
+        padding-left: calc(var(--spacing-unit) * 6);
+        padding-right: calc(var(--spacing-unit) * 6);
+    }
+
+    .profile-info,
+    .purchase-history {
+        padding: calc(var(--spacing-unit) * 4);
+    }
+}

@@ -1,0 +1,185 @@
+/* Стили для страницы checkout.html */
+
+/* Пример специфичного стиля для страницы оформления заказа,
+   если общие стили из style.css или glassmorphic-panel недостаточны.
+*/
+
+/* .checkout-page .some-specific-element {
+    color: var(--color-primary-accent);
+} */
+
+.checkout-page .checkout-section {
+    padding: calc(var(--spacing-unit) * 3);
+    /* glassmorphic-panel уже применен в HTML, здесь можно уточнить, если нужно */
+}
+
+.checkout-page h2 {
+    text-align: center; /* Централизуем главный заголовок страницы */
+    margin-bottom: calc(var(--spacing-unit) * 3.5); /* Немного увеличим отступ снизу */
+}
+
+.checkout-page h3 {
+    margin-top: calc(var(--spacing-unit) * 2.5);
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    color: var(--color-secondary-accent); /* Акцентируем подзаголовки */
+    border-bottom: 1px solid var(--color-glass-border);
+    padding-bottom: var(--spacing-unit);
+}
+
+#checkout-movie-details p,
+.checkout-info p {
+    margin-bottom: var(--spacing-unit);
+    line-height: 1.7;
+}
+
+.checkout-page hr {
+    border: none;
+    height: 1px;
+    background-color: var(--color-glass-border);
+    margin: calc(var(--spacing-unit) * 3) 0;
+}
+
+#checkout-selected-seats-list {
+    list-style: none;
+    padding-left: 0; /* Убираем отступ по умолчанию */
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+#checkout-selected-seats-list li {
+    background-color: rgba(var(--color-surface-rgb), 0.3);
+    padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 1.5);
+    margin-bottom: var(--spacing-unit);
+    border-radius: var(--border-radius-small);
+    font-size: calc(var(--p-size) * 0.95);
+    color: var(--color-text-secondary);
+}
+
+.total-checkout-price {
+    font-size: var(--h3-size); /* Крупнее для итоговой цены */
+    font-weight: bold;
+    color: var(--color-primary-accent); /* Яркий акцент на цене */
+    text-align: right;
+    margin-top: var(--spacing-unit);
+    margin-bottom: calc(var(--spacing-unit) * 2.5); 
+}
+
+.checkout-form .form-group {
+    margin-bottom: calc(var(--spacing-unit) * 2.5); /* Увеличим расстояние между группами полей */
+}
+
+.checkout-form label {
+    display: block; /* Метка над полем */
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+    font-weight: 500;
+}
+
+.checkout-actions {
+    margin-top: calc(var(--spacing-unit) * 4); /* Больше отступ перед кнопкой */
+    text-align: center; /* Центрируем кнопку, если она одна */
+}
+
+.checkout-actions .cta-button {
+    width: auto; /* Чтобы кнопка не растягивалась на 100%, если не нужно */
+    min-width: 250px; /* Минимальная ширина для солидности */
+    padding-top: calc(var(--spacing-unit) * 1.8);
+    padding-bottom: calc(var(--spacing-unit) * 1.8);
+    font-size: calc(var(--p-size) * 1.1);
+}
+
+/* Стили для сообщений об ошибках/загрузке, если нужны специфичные */
+.checkout-page .loading-message,
+.checkout-page .error-message {
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 2) 0;
+    font-style: italic;
+}
+
+.checkout-page .error-message {
+    color: var(--color-primary-accent);
+    font-weight: bold;
+}
+
+/* Адаптивность для страницы оформления заказа */
+@media (max-width: 768px) {
+    .checkout-page .checkout-section {
+        padding: calc(var(--spacing-unit) * 2.5);
+    }
+
+    .checkout-page h2 {
+        font-size: calc(var(--h2-size) * 0.9);
+        margin-bottom: calc(var(--spacing-unit) * 3);
+    }
+
+    .checkout-page h3 {
+        font-size: calc(var(--h3-size) * 0.95);
+        margin-top: calc(var(--spacing-unit) * 2);
+        margin-bottom: var(--spacing-unit);
+        padding-bottom: calc(var(--spacing-unit) * 0.75);
+    }
+
+    #checkout-movie-details p,
+    .checkout-info p,
+    #checkout-selected-seats-list li {
+        font-size: calc(var(--p-size) * 0.9);
+    }
+
+    .total-checkout-price {
+        font-size: calc(var(--h3-size) * 0.9);
+        margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+
+    .checkout-form .form-group {
+        margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+
+    .checkout-actions {
+        margin-top: calc(var(--spacing-unit) * 3);
+    }
+
+    .checkout-actions .cta-button {
+        width: 100%; /* Кнопка на всю ширину */
+        min-width: unset;
+        padding-top: calc(var(--spacing-unit) * 1.5);
+        padding-bottom: calc(var(--spacing-unit) * 1.5);
+        font-size: var(--p-size);
+    }
+}
+
+@media (max-width: 480px) {
+    .checkout-page .checkout-section {
+        padding: calc(var(--spacing-unit) * 1.5);
+        border-radius: 0; /* Можно убрать скругление углов для полного прилегания к краям */
+        margin-left: calc(var(--spacing-unit) * -1.5); /* Компенсируем отступы main-content, если они есть */
+        margin-right: calc(var(--spacing-unit) * -1.5);
+        width: calc(100% + var(--spacing-unit) * 3);
+        max-width: calc(100% + var(--spacing-unit) * 3); /* Убедимся, что это работает */
+    }
+
+    .checkout-page h2 {
+        font-size: calc(var(--h2-size) * 0.85);
+        margin-bottom: calc(var(--spacing-unit) * 2.5);
+    }
+
+    .checkout-page h3 {
+        font-size: calc(var(--h3-size) * 0.9);
+    }
+
+    #checkout-movie-details p,
+    .checkout-info p,
+    #checkout-selected-seats-list li {
+        font-size: calc(var(--p-size) * 0.85);
+        line-height: 1.6;
+    }
+
+    #checkout-selected-seats-list li {
+        padding: calc(var(--spacing-unit) * 0.8) var(--spacing-unit);
+    }
+
+    .total-checkout-price {
+        font-size: calc(var(--h3-size) * 0.85);
+    }
+
+    .checkout-actions .cta-button {
+        font-size: calc(var(--p-size)*0.95);
+    }
+} 

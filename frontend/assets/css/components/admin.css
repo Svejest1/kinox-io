@@ -1,0 +1,633 @@
+/* Стили для админской панели */
+
+body { /* Применяем ко всему body на страницах, где подключен этот CSS */
+  background-color: var(--color-background-dark, #0d1117); /* Темный фон, как на GitHub или ваш основной темный */
+  color: var(--color-text-primary, #e6edf3); /* Светлый текст по умолчанию */
+  font-family: var(--font-family-base, 'Inter', sans-serif); /* Убедимся что шрифт тот же что и на сайте*/
+}
+
+/* Более агрессивное скрытие левых иконок в шапке */
+
+/* 1. Скрываем кнопку-бургер, которая идет сразу за логотипом в HTML */
+/* Это для <button class="burger-menu-btn" aria-label="Открыть меню"> */
+.site-header > .logo + .burger-menu-btn {
+  display: none !important;
+}
+
+/* 2. Попытка скрыть предполагаемую иконку пользователя (верхняя обведенная) */
+/* Если JS добавляет ее как первый элемент в .site-header */
+.site-header > button:first-child:not(.search-btn):not(#profileButton), /* Любая кнопка, не из известных правых */
+.site-header > div:first-child:not(.logo) /* Любой div, не логотип (если иконка обернута в div) */
+{
+  display: none !important;
+}
+
+/* 3. На всякий случай, если предыдущие правила не сработали на элементы с известными классами, 
+      но они оказались слева и не должны там быть. 
+      Это правило должно быть безопасным, так как оно снова показывает нужные элементы справа. */
+.site-header > .burger-menu-btn,
+.site-header > .profile-btn {
+    display: none !important; /* Общее скрытие */
+}
+.site-header .user-actions .burger-menu-btn, /* Это кнопка с id='burgerButton' в dropdown, она и так display:none */
+.site-header .user-actions .profile-btn { /* Это кнопка профиля справа */
+    display: inline-flex !important; /* Убедимся, что правые иконки точно видны */
+}
+
+/* Если кнопка #burgerButton (которая раньше была слева под профилем) все еще существует 
+   и должна быть скрыта, а предыдущие правила ее не затронули: */
+.site-header > #burgerButton { /* Если она прямой потомок хедера и слева */
+     display: none !important;
+}
+
+/* Если нужно оставить их для мобильных, то можно обернуть в медиа-запрос, например: */
+/* @media (min-width: 769px) {
+  .site-header > .burger-menu-btn,
+  .site-header > .profile-btn {
+    display: none !important;
+  }
+  .site-header .user-actions .burger-menu-btn, 
+  .site-header .user-actions .profile-btn {
+    display: inline-flex !important; 
+  }
+} */
+
+/* Шапка админки - улучшение навигации */
+.site-header .main-nav { /* Добавляем правило для main-nav */
+  flex-grow: 1; /* Позволяем этому блоку занять доступное пространство */
+  display: flex; /* Делаем main-nav flex-контейнером */
+  justify-content: center; /* Центрируем его содержимое (ul) */
+}
+
+.site-header .main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* ul уже flex для расположения li в ряд */
+  gap: 10px; /* Пространство между элементами навигации */
+  align-items: center; /* Выравниваем элементы li по центру вертикально */
+}
+
+.site-header .main-nav ul li a {
+  color: var(--color-text-secondary, #c9d1d9);
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: 500;
+}
+
+.site-header .main-nav ul li a:hover,
+.site-header .main-nav ul li a.active {
+  background-color: var(--color-primary-accent, #f78104);
+  color: var(--color-background-dark, #0d1117); /* Или #fff, если акцентный цвет светлый */
+  font-weight: 600;
+}
+
+.site-header .logo h1 {
+    color: #fff; /* Убедимся, что логотип КиноX Админ белый */
+}
+
+.site-header .logo .accent {
+    color: var(--color-primary-accent, #f78104); /* Акцентный цвет для X */
+}
+
+.admin-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem; /* Немного изменим отступы для консистентности */
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0; /* Убираем лишний padding, т.к. он есть у admin-content */
+}
+
+.admin-header h2 {
+  color: #fff;
+  font-size: 2rem; /* Сделаем заголовок чуть больше */
+  margin: 0;
+}
+
+.empty-space {
+  width: 30px; 
+  height: 25px;
+  background-color: transparent;
+  border: none; 
+  cursor: default;
+  pointer-events: none; 
+  display: inline-block; 
+}
+
+/* Стили для списка фильмов */
+.movies-list-container {
+  background-color: var(--color-background-panel, rgba(22, 27, 34, 0.8)); /* Более явный фон панели */
+  backdrop-filter: blur(10px); /* Эффект стекла */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Тонкая светлая граница для эффекта */
+  border-radius: 10px;
+  padding: 25px; /* Немного увеличим внутренний отступ */
+  margin-bottom: 30px;
+}
+
+.movies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Увеличим расстояние между карточками */
+}
+
+.movie-item {
+  display: flex;
+  background-color: var(--color-background-card, rgba(30, 36, 45, 0.7)); /* Немного изменим фон карточки */
+  backdrop-filter: blur(5px); /* Легкий блюр для карточки, если фон контейнера тоже с блюром */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+}
+
+.movie-item:hover {
+  transform: translateY(-3px) scale(1.01); /* Небольшое увеличение при наведении */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.movie-item-poster {
+  flex: 0 0 100px;
+  height: 150px;
+  border-radius: 6px 0 0 6px; /* Скруглим углы только слева у постера */
+}
+
+.movie-item-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.movie-item-info {
+  flex: 1;
+  padding: 15px 20px; /* Увеличим отступы */
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-item-title {
+  font-size: 1.3rem; /* Увеличим шрифт заголовка фильма */
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.movie-item-title .age-rating {
+    font-size: 0.9rem;
+    font-weight: normal;
+    padding: 3px 6px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.movie-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px; /* Немного изменим гэпы */
+  margin-bottom: 12px;
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.movie-item-status {
+  margin-top: auto;
+}
+
+.status {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.status.active {
+  background-color: var(--color-success-bg, rgba(39, 174, 96, 0.2));
+  color: var(--color-success-text, #27ae60);
+  border: 1px solid var(--color-success-text, #27ae60);
+}
+
+.status.inactive {
+  background-color: var(--color-danger-bg, rgba(231, 76, 60, 0.2));
+  color: var(--color-danger-text, #e74c3c);
+  border: 1px solid var(--color-danger-text, #e74c3c);
+}
+
+.movie-item-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch; /* Кнопки растянутся на всю ширину */
+  padding: 15px;
+  gap: 10px;
+  background-color: rgba(0, 0, 0, 0.3); /* Немного темнее фон для контраста */
+  min-width: 140px;
+}
+
+/* Кнопки */
+.btn-primary {
+  background-color: var(--color-primary-accent);
+  color: #fff;
+  border: none;
+  padding: 12px 24px; /* Сделаем главную кнопку чуть больше */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(var(--color-primary-accent-rgb), 0.3);
+}
+
+.btn-primary:hover {
+  background-color: rgba(var(--color-primary-accent-rgb), 0.8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(var(--color-primary-accent-rgb), 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(var(--color-primary-accent-rgb), 0.3);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.15); /* Чуть светлее */
+  color: #e6edf3; /* Светлый текст */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Граница для лучшей видимости */
+  padding: 10px 18px; /* Увеличим немного */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-edit, .btn-toggle-status { /* Общие стили для кнопок действий в карточке */
+  border: none;
+  padding: 10px 15px; /* Увеличим паддинг */
+  border-radius: 5px; /* Единообразное скругление */
+  cursor: pointer;
+  font-size: 0.88rem; /* Немного увеличим шрифт */
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-edit {
+  background-color: var(--color-info-bg, rgba(52, 152, 219, 0.25));
+  color: var(--color-info-text, #3498db);
+}
+
+.btn-edit:hover {
+  background-color: var(--color-info-bg-hover, rgba(52, 152, 219, 0.45));
+  color: var(--color-info-text-hover, #5dade2);
+}
+
+.btn-toggle-status { /* Уже использует data-status для разных стилей */
+}
+
+/* Иконки для кнопок - исправляем Unicode escape последовательности */
+.btn-edit::before {
+  content: '\1F58A'; /* Карандаш Unicode */
+  margin-right: 8px; 
+  font-size: 1rem; 
+  font-family: "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji"; 
+}
+
+.btn-toggle-status[data-status="active"]::before {
+  content: '\1F534'; /* Красный круг Unicode */
+  margin-right: 8px;
+  font-size: 1rem;
+  font-family: "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.btn-toggle-status[data-status="inactive"]::before {
+  content: '\2705'; /* Зеленая галочка Unicode */
+  margin-right: 8px;
+  font-size: 1rem;
+  font-family: "Segoe UI Symbol", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+#addMovieBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+}
+
+#addMovieBtn::before {
+  content: "+"; /* Оставляем плюсик */
+  font-size: 1.2rem; /* Увеличим */
+  margin-right: 8px;
+}
+
+/* Модальное окно */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1050;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7); /* Более темное затемнение фона */
+  backdrop-filter: blur(5px); /* Блюр для фона */
+}
+
+.modal-content {
+  background-color: var(--color-background-modal, #1c2128); /* Темный фон для модалки */
+  margin: 10% auto;
+  padding: 25px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px; /* Ограничим максимальную ширину */
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  color: var(--color-text-primary, #e6edf3); /* Светлый текст в модалке */
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden; /* Предотвращаем горизонтальный скроллбар */
+  border: 1px solid rgba(var(--color-primary-accent-rgb), 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.close-btn:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgba(var(--color-primary-accent-rgb), 0.2);
+  padding-bottom: 10px;
+}
+
+/* Форма */
+.form-group {
+  margin-bottom: 20px; /* Увеличим расстояние между группами полей */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px; /* Увеличим отступ */
+  font-weight: 500;
+  color: var(--color-text-secondary, #c9d1d9);
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group input[type="url"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px; /* Увеличим паддинги */
+  background-color: rgba(255, 255, 255, 0.05); /* Очень легкий фон */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: var(--color-text-input, #e6edf3); /* Светлый текст в полях */
+  font-size: 1rem; /* Увеличим шрифт в полях */
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group input[type="date"]:focus,
+.form-group input[type="url"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-primary-accent, #f78104); /* Акцентная граница при фокусе */
+  outline: none;
+}
+
+.form-group select {
+  appearance: none; /* Убираем стандартную стрелку */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c9d1d9' width='18px' height='18px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Своя стрелка SVG */
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 40px; /* Место для стрелки */
+}
+
+.form-group textarea {
+  min-height: 120px; /* Увеличим минимальную высоту */
+  resize: vertical; /* Разрешим изменять только по вертикали */
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Кнопки справа */
+  gap: 15px; /* Расстояние между кнопками */
+  margin-top: 30px; /* Отступ сверху */
+  padding-top: 20px; /* Отступ для разделителя */
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Разделитель */
+}
+
+/* Блок загрузки постера */
+.poster-upload {
+  margin-bottom: 30px;
+}
+
+.poster-container {
+  display: flex;
+  gap: 20px; /* Увеличим расстояние */
+  margin-top: 10px;
+}
+
+.poster-preview {
+  flex: 0 0 200px;
+  height: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.poster-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-controls {
+  flex: 1;
+  display: flex;
+  flex-direction: column; /* Расположим элементы управления вертикально */
+  justify-content: center;
+  gap: 10px; /* Расстояние между кнопками */
+}
+
+.poster-controls button {
+  width: 100%; /* Растянем кнопки на всю доступную ширину */
+}
+
+#uploadStatus {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.status-info {
+  background-color: rgba(52, 152, 219, 0.2);
+  color: #3498db;
+}
+
+.status-loading {
+  background-color: rgba(241, 196, 15, 0.2);
+  color: #f1c40f;
+}
+
+.status-success {
+  background-color: rgba(39, 174, 96, 0.2);
+  color: #27ae60;
+}
+
+.status-error {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.error-message { /* Общий класс для сообщений об ошибках на странице */
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.loading-spinner { /* Для индикатора загрузки списка фильмов */
+  text-align: center;
+  padding: 40px;
+  font-size: 1.2rem;
+  color: var(--color-text-secondary, #c9d1d9);
+}
+
+.loading-spinner::before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: var(--color-primary-accent, #f78104);
+    animation: spin 1s ease-in-out infinite;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .admin-content {
+    padding: 1.5rem 0.5rem;
+  }
+  .movie-item {
+    flex-direction: column; /* На мобильных карточки вертикально */
+  }
+  .movie-item-poster {
+    flex: 0 0 180px; /* Увеличим высоту постера в вертикальной карточке */
+    height: auto; /* Авто-высота для сохранения пропорций */
+    width: 100%; /* Постер на всю ширину */
+    border-radius: 6px 6px 0 0; /* Скругление сверху */
+  }
+  .movie-item-poster img {
+      max-height: 250px; /* Ограничим высоту постера */
+      object-fit: cover; /* или contain, если важно видеть весь постер */
+  }
+  .movie-item-actions {
+    flex-direction: row; /* Кнопки в ряд на мобильных */
+    padding: 10px;
+  }
+   .movie-item-actions button {
+        flex: 1; /* Кнопки занимают равное пространство */
+   }
+  .poster-container {
+    flex-direction: column;
+  }
+  .poster-preview {
+    width: 100%; /* Превью на всю ширину */
+    max-width: 200px; /* Ограничим */
+    margin: 0 auto 15px auto; /* Центрируем */
+  }
+  .modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 95%;
+  }
+  .site-header .main-nav {
+    /* Предполагается, что main.js или navigation.js обрабатывает скрытие/показ навигации для мобильных */
+    /* Здесь можно добавить стили для мобильной навигации, если она становится, например, выпадающим списком */
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px; /* Расстояние между заголовком и кнопкой */
+  }
+  .admin-header h2 {
+    font-size: 1.6rem;
+  }
+  .form-actions {
+    flex-direction: column;
+  }
+  .form-actions button {
+    width: 100%; /* Кнопки на всю ширину */
+  }
+  .movie-item-title {
+    font-size: 1.1rem;
+  }
+  .movie-item-meta {
+    font-size: 0.8rem;
+  }
+} 

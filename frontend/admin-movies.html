@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление фильмами - КиноX</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components/admin.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1>Кино<span class="accent">X</span> Админ</h1>
+        </div>
+        <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">На сайт</a></li>
+                <li><a href="admin-movies.html" class="active">Фильмы</a></li>
+                <li><a href="admin-screenings.html">Сеансы</a></li>
+                <li><a href="admin-halls.html">Залы</a></li>
+                <li><a href="admin-users.html">Пользователи</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <main class="main-content admin-content">
+        <div class="admin-header">
+            <h2>Управление фильмами</h2>
+            <button id="addMovieBtn" class="btn-primary">Добавить фильм</button>
+        </div>
+
+        <!-- Список фильмов -->
+        <div class="movies-list-container">
+            <div id="moviesList" class="movies-list">
+                <div class="loading-spinner">Загрузка фильмов...</div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для добавления/редактирования фильма -->
+        <div id="movieModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3 id="modalTitle">Добавить новый фильм</h3>
+                
+                <form id="movieForm">
+                    <div class="form-group">
+                        <label for="title">Название фильма *</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="duration">Продолжительность (мин) *</label>
+                        <input type="number" id="duration" name="duration" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="releaseDate">Дата премьеры *</label>
+                        <input type="date" id="releaseDate" name="releaseDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="genre">Жанр *</label>
+                        <input type="text" id="genre" name="genre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ageRating">Возрастной рейтинг *</label>
+                        <select id="ageRating" name="ageRating" required>
+                            <option value="0+">0+</option>
+                            <option value="6+">6+</option>
+                            <option value="12+">12+</option>
+                            <option value="16+">16+</option>
+                            <option value="18+">18+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="director">Режиссер</label>
+                        <input type="text" id="director" name="director">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cast">В ролях</label>
+                        <input type="text" id="cast" name="cast">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Описание</label>
+                        <textarea id="description" name="description" rows="5"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="trailerUrl">URL трейлера</label>
+                        <input type="url" id="trailerUrl" name="trailerUrl">
+                    </div>
+                    
+                    <!-- Загрузка постера -->
+                    <div class="form-group poster-upload">
+                        <label>Постер фильма</label>
+                        <div class="poster-container">
+                            <div class="poster-preview">
+                                <img id="posterPreview" src="assets/images/poster-placeholder.jpg" alt="Предпросмотр постера">
+                            </div>
+                            <div class="poster-controls">
+                                <input type="file" id="posterInput" accept="image/*" style="display: none;">
+                                <button type="button" id="selectPosterBtn" class="btn-secondary">Выбрать файл</button>
+                                <button type="button" id="uploadPosterBtn" class="btn-primary" disabled>Загрузить постер</button>
+                                <div id="uploadStatus"></div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="posterUrl" name="posterUrl">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Сохранить</button>
+                        <button type="button" class="btn-secondary" id="cancelBtn">Отмена</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer-bottom">
+        <p>&copy; 2024 КиноX. Все права защищены. Дизайн будущего от Gemini.</p>
+    </footer>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui/navigation.js"></script>
+    <script src="assets/js/auth-check.js"></script>
+    <script src="assets/js/admin-movies.js"></script>
+</body>
+</html> 

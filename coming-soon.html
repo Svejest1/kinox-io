@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КиноX - Скоро в кино</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components/coming-soon.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1>Кино<span class="accent">X</span></h1>
+        </div>
+        <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Афиша</a></li>
+                <li><a href="schedule.html">Расписание</a></li>
+                <li><a href="coming-soon.html" class="active">Скоро</a></li>
+                <li><a href="about.html">О кинотеатре</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="search-btn" aria-label="Поиск">
+            </button>
+            <div class="user-menu-container">
+                <button class="profile-btn" aria-label="Профиль" id="profileButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </button>
+                <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false" id="burgerButton" style="display: none;">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown" id="userDropdownContainer" style="position: absolute; top: 100%; right: 0; background-color: #f9f9f9; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                    <div class="dropdown-content" id="userDropdownMenu">
+                        <a href="profile.html">Профиль</a>
+                        <a href="#">История Покупок</a>
+                        <button id="logoutButton">Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="coming-soon-section">
+            <h2>Скоро в кино</h2>
+            <p class="section-intro">Самые ожидаемые премьеры, которые скоро появятся на наших экранах. Будьте первыми, кто увидит новинки мирового кинематографа!</p>
+            
+            <div class="filter-options">
+                <button class="filter-button active">Все жанры</button>
+                <button class="filter-button">Боевик</button>
+                <button class="filter-button">Комедия</button>
+                <button class="filter-button">Драма</button>
+                <button class="filter-button">Фантастика</button>
+                <button class="filter-button">Ужасы</button>
+                <button class="filter-button">Мультфильм</button>
+            </div>
+            
+            <div class="coming-soon-grid">
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="premiere-date">10 августа</div>
+                        <img src="assets/images/posters/deadpool.jpg" alt="Дэдпул и Росомаха">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Дэдпул и Росомаха <span class="age-rating">18+</span></h3>
+                        <div class="movie-meta">
+                            <span>Боевик, Комедия</span>
+                            <span>120 мин</span>
+                        </div>
+                        <p class="movie-description">Третья часть приключений болтливого наемника Дэдпула. На этот раз он объединяется с не менее харизматичным Росомахой для противостояния общему врагу.</p>
+                        <div class="action-buttons">
+                            <button class="action-button">Трейлер</button>
+                            <button class="action-button primary">Напомнить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="premiere-date">24 августа</div>
+                        <img src="assets/images/posters/alien.jpg" alt="Чужой: Ромул">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Чужой: Ромул <span class="age-rating">18+</span></h3>
+                        <div class="movie-meta">
+                            <span>Ужасы, Фантастика</span>
+                            <span>115 мин</span>
+                        </div>
+                        <p class="movie-description">Новая глава культовой франшизы о смертоносных инопланетных существах. Группа молодых колонистов сталкивается с самым страшным хищником во вселенной.</p>
+                        <div class="action-buttons">
+                            <button class="action-button">Трейлер</button>
+                            <button class="action-button primary">Напомнить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="premiere-date">15 сентября</div>
+                        <img src="assets/images/posters/joker2.jpg" alt="Джокер: Безумие на двоих">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Джокер: Безумие на двоих <span class="age-rating">18+</span></h3>
+                        <div class="movie-meta">
+                            <span>Триллер, Драма</span>
+                            <span>135 мин</span>
+                        </div>
+                        <p class="movie-description">Продолжение истории Артура Флека. После событий первого фильма Джокер попадает в лечебницу Аркхем, где встречает свою единственную любовь — Харли Квинн.</p>
+                        <div class="action-buttons">
+                            <button class="action-button">Трейлер</button>
+                            <button class="action-button primary">Напомнить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="premiere-date">5 сентября</div>
+                        <img src="assets/images/posters/beetlejuice2.jpg" alt="Битлджус Битлджус">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Битлджус Битлджус <span class="age-rating">16+</span></h3>
+                        <div class="movie-meta">
+                            <span>Комедия, Фэнтези</span>
+                            <span>110 мин</span>
+                        </div>
+                        <p class="movie-description">Долгожданное продолжение культовой комедии Тима Бёртона. Лидия Дитц возвращается в родной город, а вместе с ней возвращается и неугомонный призрак Битлджус.</p>
+                        <div class="action-buttons">
+                            <button class="action-button">Трейлер</button>
+                            <button class="action-button primary">Напомнить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="premiere-date">12 октября</div>
+                        <img src="assets/images/posters/venom3.jpg" alt="Веном 3">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Веном 3 <span class="age-rating">16+</span></h3>
+                        <div class="movie-meta">
+                            <span>Фантастика, Боевик</span>
+                            <span>120 мин</span>
+                        </div>
+                        <p class="movie-description">Третья часть приключений журналиста Эдди Брока и его симбиота Венома. В этот раз им предстоит встретиться с новыми врагами и решить, на чьей они стороне.</p>
+                        <div class="action-buttons">
+                            <button class="action-button">Трейлер</button>
+                            <button class="action-button primary">Напомнить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <div class="premiere-date">1 ноября</div>
+                        <img src="assets/images/posters/gladiator2.jpg" alt="Гладиатор 2">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Гладиатор 2 <span class="age-rating">18+</span></h3>
+                        <div class="movie-meta">
+                            <span>Исторический, Драма</span>
+                            <span>150 мин</span>
+                        </div>
+                        <p class="movie-description">Продолжение эпической истории о Древнем Риме. События разворачиваются через несколько десятилетий после первого фильма. Новый герой выходит на арену Колизея.</p>
+                        <div class="action-buttons">
+                            <button class="action-button">Трейлер</button>
+                            <button class="action-button primary">Напомнить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer-bottom">
+        <p>&copy; 2024 КиноX. Все права защищены. Дизайн будущего от Gemini.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/auth-check.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработка кнопок фильтрации
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Здесь бы была логика фильтрации фильмов по жанрам
+                });
+            });
+            
+            // Обработка кнопок "Трейлер"
+            const trailerButtons = document.querySelectorAll('.action-button:not(.primary)');
+            
+            trailerButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const movieCard = this.closest('.movie-card');
+                    const movieTitle = movieCard.querySelector('.movie-title').textContent.trim().split(' ')[0];
+                    
+                    // Здесь бы было открытие модального окна с трейлером
+                    alert(`Открываем трейлер фильма "${movieTitle}"`);
+                });
+            });
+            
+            // Обработка кнопок "Напомнить"
+            const remindButtons = document.querySelectorAll('.action-button.primary');
+            
+            remindButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const movieCard = this.closest('.movie-card');
+                    const movieTitle = movieCard.querySelector('.movie-title').textContent.trim().split(' ')[0];
+                    const premiereDate = movieCard.querySelector('.premiere-date').textContent;
+                    
+                    // Здесь бы была логика добавления напоминания
+                    alert(`Вы подписались на напоминание о премьере фильма "${movieTitle}" (${premiereDate})`);
+                    
+                    // Меняем текст кнопки
+                    this.textContent = "Напомним!";
+                    this.disabled = true;
+                    this.style.opacity = "0.7";
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

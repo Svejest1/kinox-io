@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КиноX - Расписание</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/components/schedule.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1>Кино<span class="accent">X</span></h1>
+        </div>
+        <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+            </svg>
+        </button>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Афиша</a></li>
+                <li><a href="schedule.html" class="active">Расписание</a></li>
+                <li><a href="coming-soon.html">Скоро</a></li>
+                <li><a href="about.html">О кинотеатре</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <button class="search-btn" aria-label="Поиск">
+            </button>
+            <div class="user-menu-container">
+                <button class="profile-btn" aria-label="Профиль" id="profileButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </button>
+                <button class="burger-menu-btn" aria-label="Открыть меню" aria-expanded="false" id="burgerButton" style="display: none;">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown" id="userDropdownContainer" style="position: absolute; top: 100%; right: 0; background-color: #f9f9f9; min-width: 160px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; display: none;">
+                    <div class="dropdown-content" id="userDropdownMenu">
+                        <a href="profile.html">Профиль</a>
+                        <a href="#">История Покупок</a>
+                        <button id="logoutButton">Выйти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="schedule-section">
+            <h2>Расписание сеансов</h2>
+            <p class="section-intro">Выберите удобный день и время для посещения кинотеатра. Вы можете отфильтровать сеансы по залам и форматам показа.</p>
+            
+            <div class="filter-options">
+                <button class="filter-button active">Все залы</button>
+                <button class="filter-button">Зал 1 (IMAX)</button>
+                <button class="filter-button">Зал 2 (Dolby Atmos)</button>
+                <button class="filter-button">Зал 3</button>
+                <button class="filter-button">Зал 4</button>
+                <button class="filter-button">Зал 5 (Kids)</button>
+            </div>
+            
+            <div class="filter-options">
+                <button class="filter-button active">Все форматы</button>
+                <button class="filter-button">2D</button>
+                <button class="filter-button">3D</button>
+                <button class="filter-button">IMAX</button>
+                <button class="filter-button">Dolby Atmos</button>
+            </div>
+            
+            <div class="date-tabs" id="date-tabs-container">
+                <!-- Вкладки дат будут генерироваться здесь с помощью JavaScript -->
+            </div>
+            
+            <div class="schedule-placeholder" id="schedule-container">
+                <p style="text-align: center; padding: 50px 0;">Расписание на выбранную дату загружается...</p>
+                <p style="text-align: center; color: rgba(255,255,255,0.7);">В рабочей версии здесь будет отображаться список фильмов с сеансами</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer-bottom">
+        <p>&copy; 2024 КиноX. Все права защищены. Дизайн будущего от Gemini.</p>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/schedule.js"></script>
+    <script src="assets/js/auth-check.js"></script>
+</body>
+</html> 

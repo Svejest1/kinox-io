@@ -1,0 +1,444 @@
+/* assets/css/components/movie-details.css */
+
+/* Полностью удаляем или комментируем старые стили для .sessions-section и .session-item, чтобы избежать конфликтов */
+/*
+.sessions-section {
+    margin-top: calc(var(--spacing-unit) * 4);
+}
+.sessions-section h2 { 
+    font-size: var(--h2-size);
+    color: var(--color-text-primary);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    text-align: center;
+}
+.sessions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: calc(var(--spacing-unit) * 2);
+}
+.session-item {
+    background-color: var(--color-surface);
+    padding: calc(var(--spacing-unit) * 2);
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--color-glass-border);
+    transition: var(--transition-speed) ease;
+    text-align: center;
+}
+.session-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-primary-accent);
+    box-shadow: 0 0 10px var(--color-primary-accent);
+}
+.session-item__time {
+    font-size: var(--h3-size);
+    font-weight: bold;
+    color: var(--color-primary-accent);
+    margin-bottom: var(--spacing-unit);
+}
+.session-item__hall,
+.session-item__format,
+.session-item__price {
+    font-size: var(--p-size);
+    color: var(--color-text-secondary);
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+.session-item__price {
+    font-weight: bold;
+    color: var(--color-secondary-accent);
+}
+.session-item__book-btn {
+    margin-top: var(--spacing-unit);
+    width: 100%;
+}
+*/
+
+/* Стили, которые ДОЛЖНЫ работать с JS-генерируемой структурой */
+
+.movie-detail-page {
+    padding-top: calc(var(--header-height) + var(--spacing-unit) * 3); 
+}
+
+#movie-details-container { /* Убедимся, что этот контейнер есть в HTML и он правильный */
+    color: var(--color-text-primary);
+    max-width: var(--container-max-width, 1200px);
+    margin: 0 auto;
+    padding: 0 var(--spacing-unit-large);
+}
+
+/* Стили для блока с постером и основной инфо */
+.movie-hero { /* Это может быть секция наверху, не связанная напрямую с сеансами */
+    position: relative;
+    min-height: 60vh; 
+    display: flex;
+    align-items: flex-end; 
+    padding: calc(var(--spacing-unit) * 4);
+    border-radius: var(--border-radius-large);
+    overflow: hidden;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    background-size: cover;
+    background-position: center;
+}
+
+.movie-hero::before { /* Затемняющий градиент для hero */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(var(--color-surface-rgb,26,26,46), 0.95) 25%, rgba(var(--color-surface-rgb,26,26,46), 0.5) 60%, transparent 100%);
+    z-index: 1;
+}
+
+.movie-hero__background { /* Фоновое изображение для hero */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.6);
+}
+
+.movie-hero__content { /* Контент внутри hero */
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+}
+
+.movie-hero__title {
+    font-size: calc(var(--h1-size) * 1.4); 
+    color: var(--color-text-primary);
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.movie-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 2.5);
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    font-size: var(--p-size);
+    color: var(--color-text-secondary);
+}
+
+.movie-hero__meta span {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-unit) * 0.5);
+}
+
+.movie-hero__meta svg {
+    fill: var(--color-secondary-accent);
+    width: 1.1em;
+    height: 1.1em;
+}
+
+.movie-hero__synopsis {
+    font-size: calc(var(--p-size) * 1.05);
+    line-height: 1.65;
+    margin-bottom: calc(var(--spacing-unit) * 2.5);
+    color: var(--color-text-primary-muted, #e0e0e0);
+}
+
+.movie-actions { /* Кнопки в hero, например "смотреть трейлер" */
+    display: flex;
+    gap: calc(var(--spacing-unit) * 1.5);
+}
+
+/* Общие стили кнопок, если они нужны здесь, а не только в style.css */
+/* ... пропущены для краткости, предполагается что они есть в style.css ... */
+
+/* Секция с дополнительной информацией (актеры, режиссер) */
+.movie-additional-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: calc(var(--spacing-unit) * 3);
+    padding: calc(var(--spacing-unit) * 2) 0;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.info-block h3 { /* Заголовки в доп. инфо ("В ролях", "Режиссер") */
+    font-size: var(--h3-size);
+    color: var(--color-secondary-accent);
+    margin-bottom: calc(var(--spacing-unit) * 1);
+}
+
+.info-block ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-block li {
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    color: var(--color-text-secondary);
+}
+
+.info-block li strong {
+    color: var(--color-text-primary);
+}
+
+
+/* Секция РАСПИСАНИЯ СЕАНСОВ - ИСПРАВЛЕНИЯ */
+#movie-screenings { 
+    margin-top: calc(var(--spacing-unit) * 3);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+#movie-screenings h3 { /* Заголовок "Сеансы" */
+    text-align: center;
+    font-size: var(--h2-size);
+    color: var(--color-text-primary);
+    margin-bottom: calc(var(--spacing-unit) * 2.5); 
+}
+
+/* Стили для ДАТЫ - эти стили должны работать, так как JS (даже новая версия) генерирует .screening-date > h4 */
+.screening-date { /* Контейнер для ОДНОЙ ДАТЫ и ее сеансов */
+    margin-bottom: calc(var(--spacing-unit) * 3); 
+}
+
+.screening-date h4 { /* ЗАГОЛОВОК С ДАТОЙ (например, "5 июня") */
+    font-size: calc(var(--h3-size) * 1.15); 
+    font-weight: 600; 
+    color: var(--color-text-primary);
+    margin-bottom: calc(var(--spacing-unit) * 2); 
+    padding-bottom: calc(var(--spacing-unit) * 1); 
+    border-bottom: 1px solid var(--color-glass-border, #333746); 
+    text-align: left; 
+}
+
+/* Стили для сеансов, адаптированные под классы из СКРИНШОТА (.sessions-list, .session-item) */
+.sessions-list { /* Контейнер для КАРТОЧЕК ВРЕМЕНИ - ИЗМЕНЕН СЕЛЕКТОР */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); 
+    gap: calc(var(--spacing-unit) * 2); 
+}
+
+.session-item { /* СТИЛИ ДЛЯ ОДНОЙ КАРТОЧКИ СЕАНСА - ИЗМЕНЕН СЕЛЕКТОР */
+    background-color: var(--color-surface-alt, #1f1f2e); 
+    border: 1px solid var(--color-glass-border, #3a3a52); 
+    border-radius: var(--border-radius-main);
+    padding: calc(var(--spacing-unit) * 1.5);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 0.75); 
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    box-shadow: var(--box-shadow-soft);
+}
+
+.session-item:hover {
+    transform: translateY(-4px) scale(1.03);
+    border-color: var(--color-primary-accent, #e50914);
+    box-shadow: 0 6px 20px rgba(var(--color-primary-accent-rgb, 229, 9, 20), 0.25);
+}
+
+.session-item__time { /* ИЗМЕНЕН СЕЛЕКТОР */
+    font-size: calc(var(--h3-size) * 0.95); 
+    font-weight: bold;
+    color: var(--color-primary-accent);
+    text-align: left;
+}
+
+.session-item__hall,
+.session-item__format { /* ИЗМЕНЕНЫ СЕЛЕКТОРЫ */
+    font-size: calc(var(--p-size) * 0.9);
+    color: var(--color-text-secondary);
+    line-height: 1.45;
+    text-align: left;
+}
+
+.session-item__price { /* ИЗМЕНЕН СЕЛЕКТОР */
+    font-size: calc(var(--p-size) * 0.95); 
+    color: var(--color-text-primary);
+    font-weight: 600;
+    text-align: left;
+    margin-top: calc(var(--spacing-unit) * 0.25);
+}
+
+/* Стили для кнопки внутри session-item */
+.session-item .btn.session-item__book-btn { /* Более точный селектор для кнопки, как на скриншоте + базовый .btn */
+    display: block; 
+    width: 100%;
+    /* Стили самой кнопки (цвет, фон, паддинги) могут наследоваться от глобальных .btn и .btn-primary, 
+       но можно и переопределить/дополнить здесь, если нужно */
+    background-color: var(--color-primary-accent);
+    color: var(--color-text-primary);
+    padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 1.5);
+    border-radius: var(--border-radius-small);
+    text-align: center; 
+    text-decoration: none;
+    font-size: calc(var(--p-size)); 
+    font-weight: 500;
+    margin-top: auto; /* Кнопка прижата к низу */
+    border: none; /* Убираем рамку, если она есть от .btn */
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.session-item .btn.session-item__book-btn:hover {
+    background-color: rgba(var(--color-primary-accent-rgb, 229, 9, 20), 0.85);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(var(--color-primary-accent-rgb, 229, 9, 20),0.2);
+}
+
+/* Комментируем или удаляем старые стили для .screening-times, .screening-time-card, если они дублируют функциональность */
+/* 
+.screening-times { ... }
+.screening-time-card { ... }
+.screening-time-card .time { ... }
+.screening-time-card .hall { ... }
+.screening-time-card .format { ... }
+.screening-time-card .price { ... }
+.screening-time-card .btn-buy { ... }
+*/
+
+/* Сообщение "Нет доступных сеансов", если JS его вставит */
+#screenings-list > p {
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 4) 0;
+    color: var(--color-text-secondary);
+    font-size: var(--p-size);
+}
+
+/* Секция ТРЕЙЛЕРА */
+.trailer-section {
+    margin: calc(var(--spacing-unit) * 3) 0;
+    text-align: center;
+}
+
+.trailer-section h2 {
+     margin-bottom: calc(var(--spacing-unit) * 2);
+     font-size: var(--h2-size);
+     color: var(--color-text-primary);
+}
+
+.trailer-container {
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+    max-width: 90%; 
+    min-width: 300px; 
+    margin: 0 auto;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow-raised);
+    background-color: #000;
+}
+
+.trailer-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #movie-details-container {
+        padding: 0 var(--spacing-unit-medium);
+    }
+    .movie-hero {
+        padding: calc(var(--spacing-unit) * 2); 
+        min-height: auto; 
+        margin-bottom: calc(var(--spacing-unit) * 2.5);
+    }
+    .movie-hero__title {
+        font-size: calc(var(--h1-size) * 1.2);
+    }
+    .movie-hero__meta {
+        gap: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+    }
+    .movie-hero__synopsis {
+        font-size: var(--p-size);
+        margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+    .movie-actions .btn {
+        padding: calc(var(--spacing-unit) * 1.2) calc(var(--spacing-unit) * 2);
+        width: auto; /* Кнопки не на всю ширину, если их две */
+        flex-grow: 1; /* Позволит им занять доступное место, если нужно */
+    }
+     .movie-actions {
+        flex-direction: row; /* Возвращаем в ряд, если помещаются */
+    }
+    .movie-additional-info {
+        gap: calc(var(--spacing-unit) * 2);
+        padding: var(--spacing-unit) 0;
+    }
+
+    #movie-screenings h3 {
+        font-size: calc(var(--h2-size) * 0.95);
+        margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+    .screening-date h4 {
+        font-size: calc(var(--h3-size) * 1.1); 
+        text-align: center;
+        margin-bottom: calc(var(--spacing-unit) * 1.5);
+        padding-bottom: calc(var(--spacing-unit) * 0.75);
+    }
+    .sessions-list { /* ИЗМЕНЕН СЕЛЕКТОР */
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        gap: calc(var(--spacing-unit) * 1.5);
+    }
+    .session-item { /* ИЗМЕНЕН СЕЛЕКТОР */
+        padding: var(--spacing-unit) * 1.25;
+    }
+    .trailer-section h2 {
+        font-size: calc(var(--h2-size) * 0.95);
+    }
+}
+
+@media (max-width: 480px) {
+    #movie-details-container {
+        padding: 0 var(--spacing-unit);
+    }
+    .movie-hero {
+        padding: var(--spacing-unit) * 1.5;
+        border-radius: var(--border-radius-main);
+    }
+    .movie-hero__title {
+        font-size: calc(var(--h1-size) * 1.1);
+    }
+     .movie-hero__meta {
+        flex-direction: column; 
+        gap: var(--spacing-unit) * 0.75;
+        align-items: flex-start; 
+    }
+    .movie-actions {
+        flex-direction: column; 
+    }
+    .movie-actions .btn {
+        width: 100%; 
+    }
+    
+    #movie-screenings h3 {
+        font-size: calc(var(--h2-size) * 0.9);
+    }
+    .screening-date h4 {
+        font-size: var(--h3-size); /* Скорректировал для меньших экранов */
+    }
+    .sessions-list { /* ИЗМЕНЕН СЕЛЕКТОР */
+        grid-template-columns: 1fr; 
+        gap: var(--spacing-unit);
+    }
+    .session-item { /* ИЗМЕНЕН СЕЛЕКТОР */
+        padding: var(--spacing-unit);
+    }
+    .session-item__time { /* ИЗМЕНЕН СЕЛЕКТОР */
+        font-size: calc(var(--h3-size) * 0.9);
+    }
+    .session-item .btn.session-item__book-btn { /* ИЗМЕНЕН СЕЛЕКТОР */
+        padding: calc(var(--spacing-unit) * 1.1) 0;
+        font-size: calc(var(--p-size) * 0.95);
+    }
+    .trailer-section h2 {
+        font-size: calc(var(--h2-size) * 0.9);
+    }
+    .trailer-container {
+        max-width: 100%;
+        min-width: unset;
+        border-radius: var(--border-radius-main);
+        /* margin: 0 calc(var(--spacing-unit) * -1); /* Если нужно убрать отступы родителя */
+    }
+} 

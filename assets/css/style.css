@@ -1,0 +1,653 @@
+:root {
+    /* Цветовая Палитра "Сияющие Глубины" */
+    --color-background: #0F0F1A; /* Глубокий индиго */
+    --color-surface: #1A1A2E;  /* Темно-синий для поверхностей */
+    --color-primary-accent: #E01A7A; /* Электрический розовый */
+    --color-secondary-accent: #00F5D4; /* Яркая бирюза */
+    --color-text-primary: #F0F0F5; /* Светлый, почти белый */
+    --color-text-secondary: #A0A0B5; /* Более приглушенный серый */
+    --color-glass-bg: rgba(26, 26, 46, 0.6); /* Фон для глассморфизма */
+    --color-glass-border: rgba(224, 26, 122, 0.3);
+    --color-shadow: rgba(0, 0, 0, 0.3);
+
+    /* RGB версии для использования в rgba() */
+    --color-surface-rgb: 26, 26, 46;
+    --color-primary-accent-rgb: 224, 26, 122;
+    --color-secondary-accent-rgb: 0, 245, 212;
+
+    /* Типографика */
+    --font-primary: 'Arial', sans-serif; /* Замените на футуристический шрифт позже */
+    --font-secondary: 'Georgia', serif; /* Для акцентов или цитат */
+
+    --text-base-size: 16px;
+    --text-scale-ratio: 1.2;
+
+    --h1-size: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio)); /* ~33px */
+    --h2-size: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio)); /* ~27px */
+    --h3-size: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio)); /* ~23px */
+    --p-size: var(--text-base-size);
+
+    /* Размеры и Отступы */
+    --spacing-unit: 8px;
+    --container-max-width: 1200px; /* Восстановлено до 1200px */
+    --header-height: 80px;
+
+    /* Эффекты */
+    --border-radius-main: 12px;
+    --border-radius-small: 6px;
+    --transition-speed: 0.3s;
+    --box-shadow-soft: 0 4px 15px var(--color-shadow);
+    --box-shadow-glow: 0 0 15px var(--color-primary-accent), 0 0 30px var(--color-secondary-accent);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--text-base-size);
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    overflow-x: hidden; /* Предотвращаем горизонтальный скролл по умолчанию */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Для прижатия футера к низу */
+}
+
+main.main-content {
+    flex-grow: 1; /* Основной контент занимает все доступное пространство */
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 4);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-text-primary);
+    font-weight: 700; /* Сделаем заголовки жирнее по умолчанию */
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+h1 { font-size: var(--h1-size); }
+h2 { font-size: var(--h2-size); }
+h3 { font-size: var(--h3-size); }
+
+p {
+    font-size: var(--p-size);
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+}
+
+a {
+    color: var(--color-secondary-accent);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover, a:focus {
+    color: var(--color-primary-accent);
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    padding: calc(var(--spacing-unit) * 1) calc(var(--spacing-unit) * 2);
+    border-radius: var(--border-radius-small);
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+/* Утилитарные классы */
+.container {
+    width: 90%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 calc(var(--spacing-unit) * 3);
+}
+
+.accent {
+    color: var(--color-primary-accent);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Стили для Header и Footer (базовые) */
+.site-header {
+    height: var(--header-height);
+    background-color: var(--color-surface);
+    padding: 0 calc(var(--spacing-unit) * 4); /* Увеличен отступ с 3 до 4 единиц */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--color-glass-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* Эффект размытия для хедера */
+    background-color: rgba(26, 26, 46, 0.7); /* Полупрозрачный фон для хедера */
+}
+
+.site-header .logo h1 {
+    font-size: var(--h2-size);
+    margin: 0;
+    font-weight: bold;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: calc(var(--spacing-unit) * 3);
+}
+
+.main-nav a {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    padding: calc(var(--spacing-unit) * 0.5) 0;
+    position: relative;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary-accent);
+    transition: width var(--transition-speed) ease-out;
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--color-text-primary);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-unit) * 2);
+}
+
+.user-actions .search-btn svg,
+.user-actions .profile-btn svg {
+    fill: var(--color-text-secondary);
+    transition: fill var(--transition-speed) ease;
+}
+
+.user-actions .search-btn:hover svg,
+.user-actions .profile-btn:hover svg {
+    fill: var(--color-primary-accent);
+}
+
+.site-footer-bottom {
+    background-color: var(--color-surface);
+    color: var(--color-text-secondary);
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 2) 0;
+    font-size: calc(var(--p-size) * 0.9);
+    border-top: 1px solid var(--color-glass-border);
+    margin-top: auto; /* Прижимаем футер к низу, если контента мало */
+}
+
+/* Общий класс для панелей с эффектом глассморфизма */
+.glassmorphic-panel {
+    background-color: var(--color-glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: var(--box-shadow-soft);
+    border-radius: var(--border-radius-main);
+}
+
+/* Секция "Небесная Сфера" - заготовка */
+.celestial-sphere-section {
+    position: relative;
+    padding: calc(var(--spacing-unit) * 4) calc(var(--spacing-unit) * 2);
+    overflow: hidden;
+    background-color: var(--color-background);
+    background-image: url('../images/backgrounds/space-bg1.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-soft);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgba(var(--color-secondary-accent-rgb), 0.1);
+}
+
+.celestial-sphere-section h2 {
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 4);
+    color: var(--color-text-primary);
+    text-shadow: 0 0 10px rgba(var(--color-primary-accent-rgb), 0.7);
+    padding: 0 calc(var(--spacing-unit) * 2);
+}
+
+.movie-galaxy {
+    /* Стили для контейнера фильмов на главной - будут дорабатываться */
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--spacing-unit) * 3);
+    justify-content: center;
+    padding: calc(var(--spacing-unit) * 2);
+}
+
+/* Глобальные стили для кнопок (если еще не определены достаточно хорошо) */
+.cta-button {
+    background-color: var(--color-primary-accent);
+    color: var(--color-text-on-accent);
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2.5);
+    border: none;
+    border-radius: var(--border-radius-interactive);
+    cursor: pointer;
+    font-size: var(--p-size);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    box-shadow: var(--box-shadow-interactive);
+}
+
+.cta-button:hover, .cta-button:focus {
+    background-color: hsl(from var(--color-primary-accent) h s calc(l + 10%));
+    box-shadow: var(--box-shadow-interactive-hover);
+}
+
+.secondary-button {
+    background-color: transparent;
+    color: var(--color-secondary-accent);
+    padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 2);
+    border: 2px solid var(--color-secondary-accent);
+    border-radius: var(--border-radius-interactive);
+    cursor: pointer;
+    font-size: calc(var(--p-size) * 0.95);
+    font-weight: normal;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.secondary-button:hover, .secondary-button:focus {
+    background-color: var(--color-secondary-accent);
+    color: var(--color-background);
+}
+
+/* Стили для страниц оформления заказа и успешного заказа - ОБЪЕДИНЕНЫ */
+.checkout-page,
+.order-success-page {
+    padding-top: calc(var(--spacing-unit) * 4);
+    padding-bottom: calc(var(--spacing-unit) * 4);
+}
+
+.checkout-section,
+.order-summary-section {
+    padding: calc(var(--spacing-unit) * 3);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.checkout-section h2 {
+    margin-bottom: calc(var(--spacing-unit) * 2.5);
+    color: var(--color-text-primary);
+}
+
+.order-summary-section h2 {
+    margin-bottom: calc(var(--spacing-unit) * 2.5);
+    color: var(--color-secondary-accent);
+}
+
+.checkout-info p {
+    font-size: var(--p-size);
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-unit) * 1.5;
+}
+
+.checkout-info p:last-child {
+    margin-bottom: calc(var(--spacing-unit) * 3);
+}
+
+.checkout-actions {
+    margin-top: calc(var(--spacing-unit) * 3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-unit) * 1.5;
+}
+
+.checkout-actions .cta-button,
+.checkout-actions .secondary-button {
+    width: 100%; /* Кнопки на всю ширину контейнера */
+}
+
+/* Стили для формы оформления заказа */
+.checkout-form {
+    margin-top: calc(var(--spacing-unit) * 3);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 2.5);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing-unit) * 1);
+}
+
+.form-group label {
+    font-size: calc(var(--p-size) * 0.95);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group select {
+    background-color: rgba(var(--color-surface-rgb), 0.5);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--border-radius-small);
+    padding: calc(var(--spacing-unit) * 1.5);
+    font-size: var(--p-size);
+    outline: none;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group select:focus {
+    border-color: var(--color-secondary-accent);
+    box-shadow: 0 0 8px rgba(var(--color-secondary-accent-rgb), 0.5);
+}
+
+.form-group select {
+    appearance: none; /* Убираем стандартную стрелку */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23${'00F5D4'.slice(1)}'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); /* Кастомная стрелка SVG (цвет --color-secondary-accent) */
+    background-repeat: no-repeat;
+    background-position: right calc(var(--spacing-unit) * 1.5) center;
+    background-size: 20px;
+    padding-right: calc(var(--spacing-unit) * 5); /* Место для стрелки */
+}
+
+/* Стили для информации о заказе внутри .checkout-info, если нужны доп. */
+#checkout-selected-seats-list {
+    list-style: none;
+    padding-left: calc(var(--spacing-unit) * 2);
+    margin-bottom: var(--spacing-unit);
+}
+
+#checkout-selected-seats-list li {
+    font-size: calc(var(--p-size) * 0.9);
+    color: var(--color-text-secondary);
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+
+.total-checkout-price {
+    font-size: var(--h3-size);
+    font-weight: bold;
+    color: var(--color-secondary-accent);
+    text-align: right;
+    margin-top: var(--spacing-unit);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.checkout-info hr {
+    border: none;
+    border-top: 1px solid var(--color-glass-border);
+    margin: calc(var(--spacing-unit) * 2) 0;
+}
+
+#order-details-container {
+    text-align: left; /* Детали заказа выравниваем по левому краю */
+    margin-bottom: calc(var(--spacing-unit) * 4);
+}
+
+#order-details-container p,
+#order-details-container li {
+    font-size: var(--p-size);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-unit);
+}
+
+#order-details-container p strong {
+    color: var(--color-text-primary);
+}
+
+#order-details-container h4 {
+    font-size: var(--h3-size);
+    color: var(--color-text-primary);
+    margin-top: calc(var(--spacing-unit) * 2.5);
+    margin-bottom: var(--spacing-unit) * 1.5;
+}
+
+#order-details-container ul {
+    list-style: none;
+    padding-left: calc(var(--spacing-unit) * 2);
+    margin-bottom: var(--spacing-unit) * 1.5;
+}
+
+.total-order-price {
+    font-size: var(--h3-size);
+    font-weight: bold;
+    color: var(--color-secondary-accent);
+    margin-top: var(--spacing-unit) * 1.5;
+    margin-bottom: calc(var(--spacing-unit) * 2.5) !important; /* Важно для переопределения */
+}
+
+#order-details-container hr {
+    border: none;
+    border-top: 1px solid var(--color-glass-border);
+    margin: calc(var(--spacing-unit) * 2.5) 0;
+}
+
+.order-summary-section .loading-message,
+.order-summary-section .error-message,
+.order-summary-section .warning-message {
+    font-style: italic;
+    padding: calc(var(--spacing-unit) * 3) 0;
+}
+
+.order-actions {
+    margin-top: calc(var(--spacing-unit) * 3);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем кнопку */
+    gap: var(--spacing-unit) * 1.5;
+}
+
+.order-actions .cta-button {
+    min-width: 200px; /* Минимальная ширина для кнопки */
+    width: auto; /* Чтобы не растягивалась на 100%, если не нужно */
+}
+
+/* Стили для бургер-меню */
+.burger-menu-btn {
+    display: none; 
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    padding: calc(var(--spacing-unit) * 0.5);
+    z-index: 1001; 
+    order: 1; 
+}
+
+.burger-menu-btn svg {
+    display: block;
+}
+
+/* Адаптивность для хедера */
+@media (max-width: 768px) { 
+    .site-header {
+        padding: 0 calc(var(--spacing-unit) * 2);
+    }
+    
+    .celestial-sphere-section,
+    .upcoming-section {
+        max-width: 95%;
+        padding: calc(var(--spacing-unit) * 2);
+        margin: 0 auto calc(var(--spacing-unit) * 3) auto;
+    }
+    
+    .main-nav {
+        display: none;
+    }
+    
+    .main-nav ul {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--header-height);
+        right: 0;
+        background-color: var(--color-surface);
+        box-shadow: var(--box-shadow-soft);
+        width: 70%;
+        max-width: 300px;
+        border-radius: 0 0 0 var(--border-radius-main);
+        padding: calc(var(--spacing-unit) * 2);
+        transform: translateX(100%);
+        transition: transform var(--transition-speed) ease;
+    }
+    
+    .main-nav.nav-open ul {
+        transform: translateX(0);
+    }
+    
+    .main-nav.nav-open ul li {
+        margin-bottom: calc(var(--spacing-unit) * 2);
+    }
+    
+    .main-nav.nav-open ul li a {
+        display: block;
+        padding: calc(var(--spacing-unit)) 0;
+        font-size: calc(var(--p-size) * 1.1);
+    }
+    
+    .main-nav.nav-open ul li:last-child a {
+        margin-bottom: 0;
+    }
+    
+    .main-nav a::after {
+        display: none;
+    }
+    
+    .burger-menu-btn {
+        display: block;
+    }
+    
+    .user-actions {
+        gap: calc(var(--spacing-unit));
+        justify-content: flex-end;
+        flex-grow: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header {
+        padding: 0 calc(var(--spacing-unit));
+    }
+    
+    .site-header .logo h1 {
+        font-size: calc(var(--h2-size) * 0.9);
+    }
+    
+    .celestial-sphere-section,
+    .upcoming-section {
+        max-width: 100%;
+        padding: calc(var(--spacing-unit));
+        margin: 0 auto calc(var(--spacing-unit) * 2) auto;
+    }
+}
+
+.dropdown {
+    position: absolute; /* Важно для позиционирования относительно .user-menu-container */
+    top: 100%; /* Размещаем под кнопкой бургера */
+    right: 0; /* Выравниваем по правому краю кнопки */
+    z-index: 10; /* Чтобы быть поверх других элементов */
+}
+
+.dropdown-content {
+    display: none; /* Скрыто по умолчанию */
+    background-color: #222; /* Темно-серый фон */
+    min-width: 160px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Небольшая тень */
+    border-radius: 5px; /* Скругленные уголки */
+    overflow: hidden; /* Скрываем выходящие за границы элементы */
+}
+
+.dropdown-content a,
+.dropdown-content button {
+    color: #eee; /* Светло-серый текст */
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left; /* Выравниваем текст по левому краю */
+    border: none; /* Убираем стандартные границы кнопок */
+    background-color: transparent; /* Прозрачный фон для кнопок */
+    width: 100%; /* Занимают всю ширину меню */
+    cursor: pointer; /* Курсор "рука" при наведении */
+    font-size: 16px; /* Размер шрифта */
+    font-family: sans-serif; /* Или другой шрифт, используемый на сайте */
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: #444; /* Более темный серый при наведении */
+}
+
+/* Класс для отображения меню */
+.show {
+    display: block;
+}
+
+.upcoming-section {
+    margin-top: calc(var(--spacing-unit) * 4);
+    padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 2);
+    border-radius: var(--border-radius-main);
+    background-color: var(--color-surface);
+    box-shadow: var(--box-shadow-soft);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid rgba(var(--color-secondary-accent-rgb), 0.1);
+}
+
+.upcoming-section h2 {
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    color: var(--color-text-primary);
+    text-shadow: 0 0 10px rgba(var(--color-primary-accent-rgb), 0.7);
+    padding: 0 calc(var(--spacing-unit) * 2);
+}
